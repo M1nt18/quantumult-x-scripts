@@ -40,9 +40,16 @@ function placeName(name) {
     "Hong Kong":"\u9999\u6e2f","Macau":"\u6fb3\u95e8","Macao":"\u6fb3\u95e8","Tokyo":"\u4e1c\u4eac","Osaka":"\u5927\u962a","Nagoya":"\u540d\u53e4\u5c4b","Fukuoka":"\u798f\u5188","Sapporo":"\u672d\u5e4c","Yokohama":"\u6a2a\u6ee8","Seoul":"\u9996\u5c14","Busan":"\u91dc\u5c71","Taipei":"\u53f0\u5317","Kaohsiung":"\u9ad8\u96c4","Singapore":"\u65b0\u52a0\u5761",
     "Los Angeles":"\u6d1b\u6749\u77f6","San Jose":"\u5723\u4f55\u585e","San Francisco":"\u65e7\u91d1\u5c71","Seattle":"\u897f\u96c5\u56fe","New York":"\u7ebd\u7ea6","Chicago":"\u829d\u52a0\u54e5","Dallas":"\u8fbe\u62c9\u65af","Miami":"\u8fc8\u963f\u5bc6","Ashburn":"\u963f\u4ec0\u672c","Washington":"\u534e\u76db\u987f","Atlanta":"\u4e9a\u7279\u5170\u5927","Phoenix":"\u51e4\u51f0\u57ce","Denver":"\u4e39\u4f5b","Las Vegas":"\u62c9\u65af\u7ef4\u52a0\u65af","Houston":"\u4f11\u65af\u6566",
     "London":"\u4f26\u6566","Manchester":"\u66fc\u5f7b\u65af\u7279","Frankfurt":"\u6cd5\u5170\u514b\u798f","Dusseldorf":"\u675c\u585e\u5c14\u591a\u592b","D\u00fcsseldorf":"\u675c\u585e\u5c14\u591a\u592b","Berlin":"\u67cf\u6797","Munich":"\u6155\u5c3c\u9ed1","Hamburg":"\u6c49\u5821","Paris":"\u5df4\u9ece","Marseille":"\u9a6c\u8d5b","Amsterdam":"\u963f\u59c6\u65af\u7279\u4e39","Rotterdam":"\u9e7f\u7279\u4e39","Vienna":"\u7ef4\u4e5f\u7eb3","Zurich":"\u82cf\u9ece\u4e16","Stockholm":"\u65af\u5fb7\u54e5\u5c14\u6469","Copenhagen":"\u54e5\u672c\u54c8\u6839","Oslo":"\u5965\u65af\u9646","Helsinki":"\u8d6b\u5c14\u8f9b\u57fa","Madrid":"\u9a6c\u5fb7\u91cc","Barcelona":"\u5df4\u585e\u7f57\u90a3","Milan":"\u7c73\u5170","Rome":"\u7f57\u9a6c","Warsaw":"\u534e\u6c99","Prague":"\u5e03\u62c9\u683c","Budapest":"\u5e03\u8fbe\u4f69\u65af",
-    "England":"\u82f1\u683c\u5170","California":"\u52a0\u5229\u798f\u5c3c\u4e9a","New Jersey":"\u65b0\u6cfd\u897f","Texas":"\u5f97\u514b\u8428\u65af","Virginia":"\u5f17\u5409\u5c3c\u4e9a","Oregon":"\u4fc4\u52d2\u5188","Washington State":"\u534e\u76db\u987f\u5dde","Hong Kong":"\u9999\u6e2f","Macau":"\u6fb3\u95e8"
+    "England":"\u82f1\u683c\u5170","Scotland":"\u82cf\u683c\u5170","Wales":"\u5a01\u5c14\u58eb","California":"\u52a0\u5229\u798f\u5c3c\u4e9a","New Jersey":"\u65b0\u6cfd\u897f","Texas":"\u5f97\u514b\u8428\u65af","Virginia":"\u5f17\u5409\u5c3c\u4e9a","Oregon":"\u4fc4\u52d2\u5188","Washington State":"\u534e\u76db\u987f\u5dde","New South Wales":"\u65b0\u5357\u5a01\u5c14\u58eb","Ontario":"\u5b89\u5927\u7565","Quebec":"\u9b41\u5317\u514b","British Columbia":"\u4e0d\u5217\u98a0\u54e5\u4f26\u6bd4\u4e9a","North Rhine-Westphalia":"\u5317\u83b1\u8335-\u5a01\u65af\u7279\u6cd5\u4f26"
   };
   return m[name] || name || "";
+}
+
+function timezoneName(tz) {
+  var m = {
+    "Asia/Hong_Kong":"\u9999\u6e2f\u65f6\u95f4","Asia/Macau":"\u6fb3\u95e8\u65f6\u95f4","Asia/Shanghai":"\u4e2d\u56fd\u65f6\u95f4","Asia/Tokyo":"\u65e5\u672c\u65f6\u95f4","Asia/Seoul":"\u97e9\u56fd\u65f6\u95f4","Asia/Singapore":"\u65b0\u52a0\u5761\u65f6\u95f4","Asia/Taipei":"\u53f0\u5317\u65f6\u95f4","America/Los_Angeles":"\u7f8e\u56fd\u592a\u5e73\u6d0b\u65f6\u95f4","America/New_York":"\u7f8e\u56fd\u4e1c\u90e8\u65f6\u95f4","America/Chicago":"\u7f8e\u56fd\u4e2d\u90e8\u65f6\u95f4","America/Denver":"\u7f8e\u56fd\u5c71\u5730\u65f6\u95f4","Europe/London":"\u82f1\u56fd\u65f6\u95f4","Europe/Berlin":"\u5fb7\u56fd\u65f6\u95f4","Europe/Paris":"\u6cd5\u56fd\u65f6\u95f4","Europe/Amsterdam":"\u8377\u5170\u65f6\u95f4","Europe/Vienna":"\u5965\u5730\u5229\u65f6\u95f4","Europe/Madrid":"\u897f\u73ed\u7259\u65f6\u95f4","Europe/Rome":"\u610f\u5927\u5229\u65f6\u95f4","Australia/Sydney":"\u6089\u5c3c\u65f6\u95f4"
+  };
+  return m[tz] || tz || "";
 }
 
 var code = obj["country_iso"] || obj["country_code"] || "";
@@ -51,9 +58,9 @@ var city = placeName(obj["city"] || obj["region"] || obj["country"] || "");
 var isp = obj["asn_org"] || obj["org"] || obj["isp"] || "";
 var asn = obj["asn"] || "";
 var ip = obj["ip"] || obj["query"] || "";
-var timezone = obj["time_zone"] || obj["timezone"] || "";
+var timezone = timezoneName(obj["time_zone"] || obj["timezone"] || "");
 var flag = flagEmoji(code);
 var title = (flag ? flag + " " : "") + (city || country);
-var subtitle = isp || asn;
+var subtitle = "\u670d\u52a1\u5546:" + (isp || asn);
 var description = "\u670d\u52a1\u5546:" + (isp || "") + "\n" + "\u5730\u533a:" + [country, city].filter(Boolean).join(" ") + "\n" + "ASN:" + asn + "\n" + "IP:" + ip + "\n" + "\u65f6\u533a:" + timezone;
 $done({ title, subtitle, ip, description });
