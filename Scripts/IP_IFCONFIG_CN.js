@@ -67,24 +67,15 @@ function cityName(city) {
   return m[city] || city;
 }
 
-var flags = new Map([
-  ["CN", "????"], ["HK", "????"], ["MO", "????"], ["TW", "????"], ["JP", "????"],
-  ["KR", "????"], ["SG", "????"], ["US", "????"], ["GB", "????"], ["DE", "????"],
-  ["FR", "????"], ["NL", "????"], ["CA", "????"], ["AU", "????"], ["RU", "????"],
-  ["TH", "????"], ["VN", "????"], ["MY", "????"], ["PH", "????"], ["ID", "????"],
-  ["IN", "????"]
-]);
-
 var code = obj["country_iso"] || obj["country_code"] || "";
 var country = countryName(code, obj["country"]);
 var city = cityName(obj["city"] || obj["region"] || obj["country"] || "");
-var flag = flags.get(String(code).toUpperCase()) || "???";
 var isp = obj["asn_org"] || obj["org"] || obj["isp"] || "";
 var asn = obj["asn"] || "";
 var ip = obj["ip"] || obj["query"] || "";
 var timezone = obj["time_zone"] || obj["timezone"] || "";
 
-var title = flag + " " + City_ValidCheck(city);
+var title = City_ValidCheck(city);
 var subtitle = ISP_ValidCheck(isp || asn);
 var description =
   "\u670d\u52a1\u5546:" + ISP_ValidCheck(isp) + "\n" +
