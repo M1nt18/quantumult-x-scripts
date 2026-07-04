@@ -67,6 +67,26 @@ function cityName(city) {
   return m[city] || city;
 }
 
+function flagEmoji(code) {
+  var m = {
+    "CN": "\uD83C\uDDE8\uD83C\uDDF3",
+    "HK": "\uD83C\uDDED\uD83C\uDDF0",
+    "MO": "\uD83C\uDDF2\uD83C\uDDF4",
+    "TW": "\uD83C\uDDE8\uD83C\uDDF3",
+    "JP": "\uD83C\uDDEF\uD83C\uDDF5",
+    "KR": "\uD83C\uDDF0\uD83C\uDDF7",
+    "SG": "\uD83C\uDDF8\uD83C\uDDEC",
+    "US": "\uD83C\uDDFA\uD83C\uDDF8",
+    "GB": "\uD83C\uDDEC\uD83C\uDDE7",
+    "DE": "\uD83C\uDDE9\uD83C\uDDEA",
+    "FR": "\uD83C\uDDEB\uD83C\uDDF7",
+    "NL": "\uD83C\uDDF3\uD83C\uDDF1",
+    "CA": "\uD83C\uDDE8\uD83C\uDDE6",
+    "AU": "\uD83C\uDDE6\uD83C\uDDFA"
+  };
+  return m[(code || "").toUpperCase()] || "";
+}
+
 var code = obj["country_iso"] || obj["country_code"] || "";
 var country = countryName(code, obj["country"]);
 var city = cityName(obj["city"] || obj["region"] || obj["country"] || "");
@@ -74,8 +94,9 @@ var isp = obj["asn_org"] || obj["org"] || obj["isp"] || "";
 var asn = obj["asn"] || "";
 var ip = obj["ip"] || obj["query"] || "";
 var timezone = obj["time_zone"] || obj["timezone"] || "";
+var flag = flagEmoji(code);
 
-var title = City_ValidCheck(city);
+var title = (flag ? flag + " " : "") + City_ValidCheck(city);
 var subtitle = ISP_ValidCheck(isp || asn);
 var description =
   "\u670d\u52a1\u5546:" + ISP_ValidCheck(isp) + "\n" +
