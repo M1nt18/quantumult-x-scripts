@@ -1,54 +1,61 @@
 // Quantumult X geo_location_checker parser for https://api.ip.sb/geoip
-// Config example:
-// geo_location_checker=https://api.ip.sb/geoip, https://raw.githubusercontent.com/OWNER/quantumult-x-scripts/main/Scripts/ip-sb-qx.js
+// ?????
+// geo_location_checker=https://api.ip.sb/geoip, https://raw.githubusercontent.com/M1nt18/quantumult-x-scripts/main/Scripts/ip-sb-qx.js
 
-function pick() {
-  for (const value of arguments) {
-    if (value !== undefined && value !== null && `${value}`.length > 0) return `${value}`;
-  }
-  return "";
+if ($response.statusCode != 200) {
+  $done(null);
 }
 
-try {
-  const status = typeof $response !== "undefined" ? $response.statusCode : 0;
-  if (status && status !== 200) {
-    $done({
-      title: "IP.SB ????",
-      subtitle: `HTTP ${status}`,
-      ip: "",
-      description: ""
-    });
-  } else {
-    const body = typeof $response !== "undefined" ? $response.body : "{}";
-    const data = JSON.parse(body || "{}");
-
-    const ip = pick(data.ip);
-    const country = pick(data.country, data.country_code);
-    const city = pick(data.city);
-    const region = pick(data.region);
-    const asnRaw = pick(data.asn);
-    const asn = asnRaw && !asnRaw.toUpperCase().startsWith("AS") ? `AS${asnRaw}` : asnRaw;
-    const org = pick(data.organization, data.org, data.isp);
-    const timezone = pick(data.timezone);
-
-    const location = [country, region, city].filter(Boolean).join(" ");
-    const title = [ip, location].filter(Boolean).join(" | ");
-    const subtitle = [asn, org].filter(Boolean).join(" | ");
-    const description = [
-      ip ? `IP: ${ip}` : "",
-      location ? `??: ${location}` : "",
-      asn ? `ASN: ${asn}` : "",
-      org ? `??: ${org}` : "",
-      timezone ? `??: ${timezone}` : ""
-    ].filter(Boolean).join("\n");
-
-    $done({ title, subtitle, ip, description });
+function valid(value, fallback) {
+  if (value !== undefined && value !== null && String(value).length > 0) {
+    return String(value);
   }
-} catch (error) {
-  $done({
-    title: "IP.SB ????",
-    subtitle: `${error}`,
-    ip: "",
-    description: ""
-  });
+  return fallback || "??";
 }
+
+var flags = new Map([
+  ["AC", "????"], ["AD", "????"], ["AE", "????"], ["AF", "????"], ["AI", "????"],
+  ["AL", "????"], ["AM", "????"], ["AO", "????"], ["AR", "????"], ["AT", "????"],
+  ["AU", "????"], ["AZ", "????"], ["BA", "????"], ["BD", "????"], ["BE", "????"],
+  ["BG", "????"], ["BH", "????"], ["BN", "????"], ["BR", "????"], ["CA", "????"],
+  ["CH", "????"], ["CL", "????"], ["CN", "????"], ["CO", "????"], ["CZ", "????"],
+  ["DE", "????"], ["DK", "????"], ["DO", "????"], ["DZ", "????"], ["EE", "????"],
+  ["EG", "????"], ["ES", "????"], ["FI", "????"], ["FR", "????"], ["GB", "????"],
+  ["HK", "????"], ["HU", "????"], ["ID", "????"], ["IE", "????"], ["IL", "????"],
+  ["IN", "????"], ["IR", "????"], ["IT", "????"], ["JP", "????"], ["KR", "????"],
+  ["LU", "????"], ["MO", "????"], ["MX", "????"], ["MY", "????"], ["NL", "????"],
+  ["NO", "????"], ["NZ", "????"], ["PH", "????"], ["PL", "????"], ["PT", "????"],
+  ["RO", "????"], ["RU", "????"], ["SA", "????"], ["SE", "????"], ["SG", "????"],
+  ["TH", "????"], ["TR", "????"], ["TW", "????"], ["UA", "????"], ["US", "????"],
+  ["VN", "????"], ["ZA", "????"]
+]);
+
+var body = $response.body;
+var obj = JSON.parse(body || "{}");
+
+var countryCode = valid(obj["country_code"], "").toUpperCase();
+var flag = flags.get(countryCode) || "???";
+var country = valid(obj["country"], countryCode || "????");
+var region = valid(obj["region"], "");
+var city = valid(obj["city"], "????");
+var ip = valid(obj["ip"], "");
+var asnValue = valid(obj["asn"], "");
+var asn = asnValue && asnValue.indexOf("AS") === 0 ? asnValue : (asnValue ? "AS" + asnValue : "??ASN");
+var org = valid(obj["organization"] || obj["org"] || obj["isp"], "?????");
+var timezone = valid(obj["timezone"], "????");
+
+var area = [country, region, city].filter(function (x) { return x && x !== "??"; }).join(" ");
+var title = flag + " " + city;
+var subtitle = "? " + asn + " - " + org + " ?";
+var description =
+  "???: " + org + "
+" +
+  "??: " + area + "
+" +
+  "ASN: " + asn + "
+" +
+  "IP: " + ip + "
+" +
+  "??: " + timezone;
+
+$done({ title: title, subtitle: subtitle, ip: ip, description: description });
